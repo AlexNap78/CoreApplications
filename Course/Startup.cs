@@ -52,29 +52,11 @@ namespace Course
             //Codice necessario per la visualizzazione dei files statici
             app.UseSpaStaticFiles();
 
-            app.Run(async (context) =>
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routeBuilder =>
             {
-                string nome = context.Request.Query["nome"];
-                await context.Response.WriteAsync($"Hello {nome}!");
+                routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
-
-
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
-
-            //app.UseHttpsRedirection();
-            //app.UseStaticFiles();
-            //app.UseCookiePolicy();
-
-            //app.UseMvc();
         }
     }
 }

@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Course.Models.Services.Application;
+using Course.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Course.Controllers
 {
     public class CoursesController : Controller
     {
-        public IActionResult Index()
+        private readonly ICourseService courseService;
+
+        public CoursesController(ICourseService courseService)
         {
-            return Content("Sono Index");
+            this.courseService = courseService;
         }
 
-        public IActionResult Detail(string id)
+        public IActionResult Index()
         {
-            return Content($"Sono Detail con id {id}");
+            
+            List<CourseViewModel> courses = courseService.GetCourses();
+            return View(courses);
+        }
+
+        public IActionResult Detail(int id)
+        {
+           
+            CourseDetailViewModel course = courseService.GetCourse(id);
+
+            return View(course);
         }
     }
 }

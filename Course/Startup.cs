@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Course.Models.Services.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,9 +35,9 @@ namespace Course
             //Codice necessario per la visualizzazione dei files statici
             services.AddSpaStaticFiles(config => config.RootPath = "wwwroot");
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddTransient<ICourseService, CourseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
